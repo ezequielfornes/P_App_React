@@ -3,21 +3,16 @@ import {Marker, Popup} from 'react-leaflet';
 import { IconLocation } from "./IconLocation";
 
 export const Markers = ({provincias}) =>{
-    /*const { venues } = props;
-    const markers = venues.map((venue, i) => (
-      <Marker key={i} position={venue.geometry} icon={IconLocation}>
-        <Popup data={venue} />
-      </Marker>
-    ));
-    return <>{markers}</>;*/
-      
+    
+      console.log(provincias.centroide.lat);
 
     return (
-        <Marker position={(provincias.provincias.centroide.lat , provincias.provincias.centroide.lon)} icon={IconLocation}>
+      <>
+        <Marker position={(provincias.centroide.lat ), (provincias.centroide.lon)} icon={IconLocation}>
         <Popup>
-            {provincias.provincias.nombre}
+            {provincias.nombre}
         </Popup>
         </Marker>
-         
+      </> 
     );
 };

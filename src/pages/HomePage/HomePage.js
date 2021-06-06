@@ -11,6 +11,7 @@ export const HomePage = ({setPlace}) =>{
     function handleSearchClick(){
       setPlace(input.toLowerCase());
       history.replace("/map");
+      console.log(input);
     }
 
     function handleInputChange(event){

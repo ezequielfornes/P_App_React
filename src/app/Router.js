@@ -1,7 +1,8 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { HomePage } from "../pages/HomePage/HomePage";
-import { MapView } from "../pages/Map/MapView";
+
 import React from 'react';
+import {Places} from "../pages/Places/Places";
 
 
 export const Router = () =>{
@@ -21,7 +22,7 @@ const [institutosData, setInstitutosData]=React.useState(); */
         {/* <Places institutosData={institutosData} setInstitutosData={setInstitutosData}
         organismosData organismosData, setOrganismosData}/> */}
           <Route path="/map">
-          <MapView place={place}/>
+          <Places place={place}/>
           </Route>
 
           <Route path="/">
