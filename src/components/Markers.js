@@ -2,15 +2,14 @@ import React from 'react';
 import {Marker, Popup} from 'react-leaflet';
 import { IconLocation } from "./IconLocation";
 
-export const Markers = ({provincias}) =>{
-    
-      console.log(provincias.centroide.lat);
+export const Markers = ({prov}) =>{
+      console.log(prov);
 
     return (
       <>
-        <Marker position={(provincias.centroide.lat ), (provincias.centroide.lon)} icon={IconLocation}>
+        <Marker position={prov.centroide} icon={IconLocation}>
         <Popup>
-            {provincias.nombre}
+            {prov.nombre}
         </Popup>
         </Marker>
       </> 

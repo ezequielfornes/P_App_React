@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React,{useState} from 'react';
 
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -10,20 +10,31 @@ import { Markers } from "../../components/Markers";
 import styled from 'styled-components';
 
 
-export const MapView = ({provincias}) => {
+ export  const MapView = ({provincias}) => {
+  const prov=  provincias;
+  console.log(prov.centroide);
 
-
-   return <MapContainer center={[provincias.centroide.lat , provincias.centroide.lon ]} zoom={13}>
+  const [state, setState] = useState({
+     
+   currentLocation: {lat: (prov.centroide.lat), lng:(prov.centroide.lon)} 
+  })
+  
+   return ( 
+     
+    <MapContainer center={state.currentLocation} zoom={13}>
    
-   <TileLayer
-      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" 
-   />
-   <Markers provincias = {provincias}/>
- </MapContainer>
+        <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" 
+        />
+        
+         <Markers prov={prov}/> 
+    </MapContainer> 
+      
+ )
  }
 
-  
+ 
 const ButtonWrapper= styled.div`
 display:flex;
 margin-top: 20px;
