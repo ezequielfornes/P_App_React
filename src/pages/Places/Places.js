@@ -7,7 +7,10 @@ export const Places = (place) =>{
   const [provincias, setProvincias] = React.useState();
   const [status, setStatus] = React.useState("");
 
-  
+  function handleError(){
+    history.replace("/");
+  }
+  const history= useHistory();
   
      React.useEffect(() =>{
       fetchPlace(place);
@@ -16,21 +19,39 @@ export const Places = (place) =>{
      },[] );
 
      const fetchPlace = async(place) => {
+       setStatus("loading")
       console.log(place.place);
         const data = await fetch(`http://apis.datos.gob.ar/georef/api/provincias?nombre=${place.place}`);
-        console.log(data);
         const places= await data.json();
-        console.log(places.provincias[0].centroide.lat);
-        setProvincias(places.provincias[0]);
-        
+        console.log(data);
+        console.log(places);
+        if(places.errores || places.cantidad===0){
+          setStatus("error");
+        }
+        if(places.cantidad>0){
+          setProvincias(places.provincias[0]);
+          setStatus("success");
+        } 
+
+      console.log(status);
       }
-      
-      if(provincias){
+      if(provincias && status==="success"){
         return(  
           <>
           <MapView provincias={provincias}/>
           </>   
         )
+      }else if((!provincias && status==="error")){
+        return (
+          <>
+            <div>
+              Debe ingresar una provincia valida en Argentina
+              
+              <button onClick={handleError}>Volver a buscar</button>
+              
+            </div>
+          </>
+          );
       }else {
         return("Loading..")
       }
